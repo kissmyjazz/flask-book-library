@@ -1,0 +1,1166 @@
+{
+	"info": {
+		"name": "flask",
+		"_postman_id": "08a11804-cbce-53f3-d605-696ce9c341cc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"denis\",\n\t\"password\": \"secret\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"register"
+					]
+				},
+				"description": "/books/"
+			},
+			"response": []
+		},
+		{
+			"name": "/auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"pm.environment.set(\"jwt_token\", jsonData.access_token);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Access token was not empty\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.access_token).to.not.eql(\"\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"denis\",\n\t\"password\": \"secret\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/auth",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth"
+					]
+				},
+				"description": "/books/"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/books",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books"
+					]
+				},
+				"description": "/books/"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn> Post first book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"",
+							"",
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Great Gatsby\",\n\t\"author\": \"Scott Fitzgerald\"\n\t\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/5643879832001",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"5643879832001"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/books/5643879832001",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"5643879832001"
+					]
+				},
+				"description": "/books/"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn> Post second book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"The Old Man and The Sea\",\n\t\"author\": \"Ernest Hemingway\",\n\t\"year\": \"1995\",\n\t\"publisher\": \"Scribner\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/5645879832201",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"5645879832201"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn> Loan second book to second customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"The Old Man and The Sea\",\n\t\"author\": \"Ernest Hemingway\",\n\t\"year\": \"1995\",\n\t\"publisher\": \"Scribner\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/5645879832201/2/loan",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"5645879832201",
+						"2",
+						"loan"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn> Post third book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Flask Web Development: Developing Web Applications with Python\",\n\t\"author\": \"Miguel Grinberg\",\n\t\"year\": \"2014\",\n\t\"publisher\": \"O'Reilly Media\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/5645875783901",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"5645875783901"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn> Loan third book to second customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Flask Web Development: Developing Web Applications with Python\",\n\t\"author\": \"Miguel Grinberg\",\n\t\"year\": \"2014\",\n\t\"publisher\": \"O'Reilly Media\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/5645875783901/2/loan",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"5645875783901",
+						"2",
+						"loan"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn> Post fourth book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Fluent Python\",\n\t\"author\": \"Luciano Ramalho\",\n\t\"year\": \"2015\",\n\t\"publisher\": \"O'Reilly Media\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/9781491946008",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"9781491946008"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/<id> Post a customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.test(\"Customer 1 already exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.include(\"A customer\");",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							" ",
+							"tests[\"Has Content-Type\"] = contentTypeHeaderExists;",
+							" ",
+							"if (contentTypeHeaderExists) {",
+							"    tests[\"Content-Type is application/json\"] = ",
+							"      responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"}",
+							" ",
+							" "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John Bull\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/customers/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						"1"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn> Loan fourth book to second customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Fluent Python\",\n\t\"author\": \"Luciano Ramalho\",\n\t\"year\": \"2015\",\n\t\"publisher\": \"O'Reilly Media\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/9781491946008/2/loan",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"9781491946008",
+						"2",
+						"loan"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/<id> Modify a second customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Tõnis Chicken\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/customers/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						"2"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn> Return fourth book from second customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Fluent Python\",\n\t\"author\": \"Luciano Ramalho\",\n\t\"year\": \"2015\",\n\t\"publisher\": \"O'Reilly Media\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/9781491946008/2/return",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"9781491946008",
+						"2",
+						"return"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn> Delete second book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"The Old Man and The Sea\",\n\t\"author\": \"Ernest Hemingway\",\n\t\"year\": \"1995\",\n\t\"publisher\": \"Scribner\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/5645879832201",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"5645879832201"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/<isbn>",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Great Gatsby\",\n\t\"author\": \"Ernest Hemingway\",\n\t\"year\": \"1937\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/books/5643879832001",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"5643879832001"
+					]
+				},
+				"description": "/books/<isbn>"
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/customers/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						""
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/<id> Post a second customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Tõnis Ploom\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/customers/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						"2"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/<id> Get a second customer",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Tõnis Chicken\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/customers/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						"2"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/<id> Get a customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John Bull\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/customers/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						"1"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/ available",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/books/available/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"available",
+						""
+					]
+				},
+				"description": "/books/"
+			},
+			"response": []
+		},
+		{
+			"name": "/books/ borrowed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/books/borrowed/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"books",
+						"borrowed",
+						""
+					]
+				},
+				"description": "/books/"
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/<id> Get a first customer books",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John Bull\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/customers/1/books",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						"1",
+						"books"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/<id> Get a second customer books",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John Bull\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/customers/2/books",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						"2",
+						"books"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/<id> Get books for nonexistent customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John Bull\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/customers/3/books",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						"3",
+						"books"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/healthcheck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John Bull\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/healthcheck",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"healthcheck"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		},
+		{
+			"name": "/environment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT {{jwt_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John Bull\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/environment",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"environment"
+					]
+				},
+				"description": "/customers/"
+			},
+			"response": []
+		}
+	]
+}
