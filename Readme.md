@@ -19,6 +19,17 @@ python run.py
 
 runs the server.
 
+Some endpoints require authorisation.
+Registration is done by sending username and password in the body of the HTTP request, e.g.
+
+```
+{
+	"username": "name"
+	"password": "strongpasswd"
+}
+```
+
+
 Healthcheck is located at:
 
 ```
