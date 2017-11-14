@@ -6,7 +6,8 @@ Tested with python 3.6
 
 Application starts by running 
 
-````
+
+```
 python run.py 
 ```
 
@@ -16,7 +17,8 @@ to create tables in a database, then
 python run.py 
 ```
 
-runs the server
+runs the server.
+
 Healthcheck is located at:
 
 ```
