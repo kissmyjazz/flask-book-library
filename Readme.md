@@ -14,7 +14,7 @@ python run.py
 to create tables in a database, then
 
 ```
-python run.py 
+python app.py 
 ```
 
 runs the server.
