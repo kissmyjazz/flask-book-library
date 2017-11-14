@@ -43,7 +43,7 @@ class BookModel(db.Model):
 
     @classmethod
     def get_by_id(cls, _id):
-        return cls.query.get(int(id))
+        return cls.query.get(int(_id))
 
     @classmethod
     def is_loaned(cls, isbn):
